@@ -18,8 +18,6 @@ class Node
   validates_presence_of :name, :summary, :section
   validates_uniqueness_of :name
 
-  has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following_nodes
-
   scope :hots, desc(:topics_count)
   scope :sorted, desc(:sort)
 

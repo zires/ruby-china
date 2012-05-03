@@ -64,10 +64,6 @@ class User
 
   validates :login, :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
 
-  has_and_belongs_to_many :following_nodes, :class_name => 'Node', :inverse_of => :followers
-  has_and_belongs_to_many :following, :class_name => 'User', :inverse_of => :followers
-  has_and_belongs_to_many :followers, :class_name => 'User', :inverse_of => :following
-
   scope :hot, desc(:replies_count, :topics_count)
 
   def self.find_for_database_authentication(conditions)
