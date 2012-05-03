@@ -7,6 +7,7 @@ class User
   include Mongoid::BaseModel
   include Redis::Objects
   extend OmniauthCallbacks
+  include Mongoid::UserFollowable
   cache
 
   devise :database_authenticatable, :registerable,
