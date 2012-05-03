@@ -1,4 +1,13 @@
 <div class="sidebar">
+  <div class="box" id="user_followable">
+    <div class="content">
+      <div class="buttons"><%= user_follow_button_tag(user, :class => "large", :label_id => "#followers_count") %></div>
+      <div class="row totals">
+        <span class="span2 following"><b id="followings_count"><%= user.followings_count %></b>正在关注</span>
+        <span class="span2"><b id="followers_count"><%= user.followers_count %></b>关注者</span>
+      </div>
+    </div>
+  </div>
   <div class="box" id="user_github_repos">
     <% if not user.github.blank? %>
       <h2>Github Public Repos</h2>

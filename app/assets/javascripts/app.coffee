@@ -72,6 +72,33 @@ window.App =
       data : logins
       tpl : "<li data-keyname='${login}'>${login} <small>${name}</small></li>"
 
+  followUser : (el) ->
+    user_id = $(el).data("id")
+    follower_count_el = $(el).data("label-id")
+    $(el).text("...").addClass("disable")
+    $.ajax
+      url : "/users/#{user_id}/follow"
+      type : "POST"
+      success : (count) ->
+        $(follower_count_el).text(count)
+        $(el).text("关注中").removeClass("disable").addClass("info")
+        $(el).attr("onclick", "return App.unfollowUser(this);")
+    false
+    false
+
+  unfollowUser : (el) ->
+    user_id = $(el).data("id")
+    follower_count_el = $(el).data("label-id")
+    $(el).text("...").addClass("disable")
+    $.ajax
+      url : "/users/#{user_id}/unfollow"
+      type : "POST"
+      success : (count) ->
+        $(follower_count_el).text(count)
+        $(el).text("关注").removeClass("disable").removeClass("info")
+        $(el).attr("onclick", "return App.followUser(this);")
+    false
+
   initForDesktopView : () ->
     return if typeof(app_mobile) != "undefined"
     $("a[rel=twipsy]").twipsy({ live: true })

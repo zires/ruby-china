@@ -54,6 +54,20 @@ table {
   }
 }
 
+#user_followable {
+  .content {
+    text-align:center;
+    .totals { 
+      margin-left:0; border-top:1px solid #ddd; padding-top:10px; margin-top:10px;
+      span { 
+        margin:0 5px; color:#999; 
+        b { font-size:14px; color:#333; display:block;}
+      }
+      span.following { border-right:1px solid #ddd; margin-right:4px;}
+    }
+  }
+}
+
 #user_github_repos {
   .more { text-align:right; }
   li { 

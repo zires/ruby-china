@@ -1,6 +1,6 @@
 # coding: utf-8
 class UsersController < ApplicationController
-  before_filter :require_user, :only => "auth_unbind"
+  before_filter :require_user, :only => [:auth_unbind, :follow, :unfollow]
   before_filter :init_base_breadcrumb
   before_filter :set_menu_active
   before_filter :find_user, :only => [:show, :topics, :favorites]
@@ -55,6 +55,18 @@ class UsersController < ApplicationController
     end
 
     drop_breadcrumb(@location.name)
+  end
+
+  def follow
+    @user = User.find_by_id(params[:id])
+    current_user.follow(@user)
+    render :text => @user.followers_count
+  end
+
+  def unfollow
+    @user = User.find_by_id(params[:id])
+    current_user.unfollow(@user)
+    render :text => @user.followers_count
   end
 
   protected

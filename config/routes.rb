@@ -28,6 +28,8 @@ RubyChina::Application.routes.draw do
     member do
       get :topics
       get :favorites
+      post :follow
+      post :unfollow
     end
   end
   resources :notifications, :only => [:index, :destroy] do

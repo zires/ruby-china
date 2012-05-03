@@ -80,6 +80,20 @@ module UsersHelper
     end
   end
 
+  def user_follow_button_tag(user, opts = {})
+    return "" if current_user.blank?
+    return "" if user.blank?
+    return "你自己" if current_user.id == user.id
+    opts[:class] ||= ""
+    if current_user.following?(user)
+      link_to "关注中", '#', 'data-id' => user.id, 'data-label-id' => opts[:label_id], 
+              :class => "btn info #{opts[:class]}", :onclick => "return App.unfollowUser(this);"
+    else
+      link_to "关注", '#', 'data-id' => user.id, 'data-label-id' => opts[:label_id], 
+              :class => "btn #{opts[:class]}", :onclick => "return App.followUser(this);"
+    end
+  end
+
   private
 
   def user_popover_info(user)
