@@ -29,6 +29,9 @@ gem "mongoid_colored_logger", "0.1.1"
 # 用户系统
 gem 'devise', '1.5.2'
 
+# Rank，勋章系统
+gem 'merit', :git => "git://github.com/huacnlee/merit.git"
+
 # 分页
 gem 'will_paginate', '3.0.2'
 gem 'will_paginate_mongoid', '~> 1.0.2'

@@ -130,10 +130,11 @@ class TopicsController < ApplicationController
   end
 
   def favorite
+    @topic = Topic.find(params[:id])
     if params[:type] == "unfavorite"
-      current_user.unfavorite_topic(params[:id])
+      current_user.unfavorite_topic(@topic.id)
     else
-      current_user.favorite_topic(params[:id])
+      current_user.favorite_topic(@topic.id)
     end
     render :text => "1"
   end

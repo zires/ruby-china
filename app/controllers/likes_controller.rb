@@ -4,13 +4,13 @@ class LikesController < ApplicationController
   before_filter :find_likeable
 
   def create
-    current_user.like(@item)
-    render :text => @item.reload.likes_count
+    current_user.like(@like)
+    render :text => @like.reload.likes_count
   end
 
   def destroy
-    current_user.unlike(@item)
-    render :text => @item.reload.likes_count
+    current_user.unlike(@like)
+    render :text => @like.reload.likes_count
   end
 
   private
@@ -23,8 +23,8 @@ class LikesController < ApplicationController
     end
 
     klass = params[:type].constantize
-    @item = klass.find_by_id(params[:id])
-    if @item.blank?
+    @like = klass.find_by_id(params[:id])
+    if @like.blank?
       render :text => "-2"
       return false
     end
