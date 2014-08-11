@@ -25,9 +25,6 @@ eos
 
 # Footer HTML
 SiteConfig.save_default("footer_html",<<-eos
-<p class="copyright">
- &copy; Ruby China Group.
-</p>
 eos
 )
 
