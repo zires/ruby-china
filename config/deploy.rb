@@ -1,29 +1,32 @@
 # coding: utf-8
 require "bundler/capistrano"
-require "sidekiq/capistrano"
-require "rvm/capistrano"
+#require "sidekiq/capistrano"
+#require "rvm/capistrano"
+require "capistrano-rbenv"
 require 'puma/capistrano'
 
 default_run_options[:pty] = true
 
-set :rvm_ruby_string, 'ruby-2.1.2'
-set :rvm_type, :user
-set :application, "ruby-china"
-set :repository,  "git://github.com/ruby-china/ruby-china.git"
-set :branch, "master"
+#set :rvm_ruby_string, 'ruby-2.1.2'
+#set :rvm_type, :user
+set :rbenv_ruby_version, "2.1.2"
+set :application, "dafren"
+set :use_sudo, false
+set :repository,  "git://github.com/zires/ruby-china.git"
+set :branch, "df"
 set :scm, :git
-set :user, "ruby"
-set :deploy_to, "/data/www/#{application}"
-set :runner, "ruby"
+set :user, "dep"
+set :deploy_to, "/home/dep/www/#{application}"
+set :runner, "dep"
 # set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 set :puma_role, :app
 set :puma_config_file, "config/puma.rb"
 
-role :web, "ruby-china.org"                          # Your HTTP server, Apache/etc
-role :app, "ruby-china.org"                          # This may be the same as your `Web` server
-role :db,  "ruby-china.org", primary: true # This is where Rails migrations will run
-role :queue, "ruby-china.org"
+role :web, "dafren.com"                          # Your HTTP server, Apache/etc
+role :app, "dafren.com"                          # This may be the same as your `Web` server
+role :db,  "dafren.com", primary: true # This is where Rails migrations will run
+role :queue, "dafren.com"
 
 namespace :sidekiq do
   task :quiet, roles: :queue do
@@ -80,5 +83,5 @@ task :mongoid_migrate_database, roles: :web do
 end
 
 after "deploy:finalize_update","deploy:symlink", :init_shared_path, :link_shared_files , :mongoid_migrate_database , :compile_assets
-before "deploy:update_code", "sidekiq:quiet"
+#before "deploy:update_code", "sidekiq:quiet"
 after "deploy:update", "sidekiq:stop"

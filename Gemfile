@@ -99,7 +99,8 @@ gem 'rack-cors', require: 'rack/cors'
 
 group :development, :test do
   gem 'capistrano', '2.9.0', require: false
-  gem 'rvm-capistrano', require: false
+  #gem 'rvm-capistrano', require: false
+  gem 'capistrano-rbenv'
   gem 'rspec-rails', '~> 3.0.1'
   gem 'factory_girl_rails', '1.4.0'
   gem 'database_cleaner'
